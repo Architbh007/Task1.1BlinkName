@@ -1,0 +1,78 @@
+#define LED_PIN LED_BUILTIN  
+
+// Blink durations in milliseconds
+#define DOT 100    
+#define DASH 300    
+#define GAP 200    
+#define WORD_GAP 600  
+
+// Function to blink a dot 
+void blinkDot() {
+    digitalWrite(LED_PIN, HIGH);
+    delay(DOT);
+    digitalWrite(LED_PIN, LOW);
+    delay(DOT);
+}
+
+// Function to blink a dash
+void blinkDash() {
+    digitalWrite(LED_PIN, HIGH);
+    delay(DASH);
+    digitalWrite(LED_PIN, LOW);
+    delay(DOT);
+}
+
+// Function to blink a letter in Morse code
+void blinkLetter(char letter) {
+    letter = toupper(letter);  // Converts to uppercase
+
+    switch (letter) {
+        case 'A': blinkDot(); blinkDash(); break;
+        case 'B': blinkDash(); blinkDot(); blinkDot(); blinkDot(); break;
+        case 'C': blinkDash(); blinkDot(); blinkDash(); blinkDot(); break;
+        case 'D': blinkDash(); blinkDot(); blinkDot(); break;
+        case 'E': blinkDot(); break;
+        case 'F': blinkDot(); blinkDot(); blinkDash(); blinkDot(); break;
+        case 'G': blinkDash(); blinkDash(); blinkDot(); break;
+        case 'H': blinkDot(); blinkDot(); blinkDot(); blinkDot(); break;
+        case 'I': blinkDot(); blinkDot(); break;
+        case 'J': blinkDot(); blinkDash(); blinkDash(); blinkDash(); break;
+        case 'K': blinkDash(); blinkDot(); blinkDash(); break;
+        case 'L': blinkDot(); blinkDash(); blinkDot(); blinkDot(); break;
+        case 'M': blinkDash(); blinkDash(); break;
+        case 'N': blinkDash(); blinkDot(); break;
+        case 'O': blinkDash(); blinkDash(); blinkDash(); break;
+        case 'P': blinkDot(); blinkDash(); blinkDash(); blinkDot(); break;
+        case 'Q': blinkDash(); blinkDash(); blinkDot(); blinkDash(); break;
+        case 'R': blinkDot(); blinkDash(); blinkDot(); break;
+        case 'S': blinkDot(); blinkDot(); blinkDot(); break;
+        case 'T': blinkDash(); break;
+        case 'U': blinkDot(); blinkDot(); blinkDash(); break;
+        case 'V': blinkDot(); blinkDot(); blinkDot(); blinkDash(); break;
+        case 'W': blinkDot(); blinkDash(); blinkDash(); break;
+        case 'X': blinkDash(); blinkDot(); blinkDot(); blinkDash(); break;
+        case 'Y': blinkDash(); blinkDot(); blinkDash(); blinkDash(); break;
+        case 'Z': blinkDash(); blinkDash(); blinkDot(); blinkDot(); break;
+    }
+
+    delay(GAP);  // Small gap between letters
+}
+
+// Function to blink an entire name in Morse code
+void blinkName(const char name[]) {  
+    for (int i = 0; name[i] != '\0'; i++) {  
+        if (name[i] != ' ') {  
+            blinkLetter(name[i]);  
+        }  
+    }  
+
+    delay(WORD_GAP);  // Longer gap between words
+}
+
+void setup() {
+    pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+    blinkName("Nicholas");  
+}
